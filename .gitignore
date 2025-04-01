@@ -1,0 +1,26 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build
+bin/
+obj/
+
+# Packages
+packages/
+*.nupkg
+
+# Test results
+TestResults/
+
+# Others
+*.log
+*.DS_Store
+*.env
+*.cache
+
+# OS generated
+Thumbs.db
+ehthumbs.db
+desktop.ini
