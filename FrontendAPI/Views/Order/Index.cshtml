@@ -4,47 +4,64 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
 
-<h4>Order</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Index">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="OrderNumber" class="control-label"></label>
-                <input asp-for="OrderNumber" class="form-control" />
-                <span asp-validation-for="OrderNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Amount" class="control-label"></label>
-                <input asp-for="Amount" class="form-control" />
-                <span asp-validation-for="Amount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentGateway" class="control-label"></label>
-                <input asp-for="PaymentGateway" class="form-control" />
-                <span asp-validation-for="PaymentGateway" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            $('#orderForm').submit(function (e) {
+                e.preventDefault();
 
-<div>
-    <a asp-action="Index">Back to List</a>
+                const order = {
+                    orderNumber: $('#OrderNumber').val(),
+                    amount: parseFloat($('#Amount').val()),
+                    paymentGateway: $('#PaymentGateway').val(),
+                    description: $('#Description').val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Order/Index',
+                    data: JSON.stringify(order),
+                    contentType: 'application/json',
+                    success: function (receiptHtml) {
+                        $('#receiptContainer').html(receiptHtml);
+                    },
+                    error: function () {
+                        alert('Order processing failed.');
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Create Order</h2>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.OrderNumber)
+            @Html.TextBoxFor(m => m.OrderNumber, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Amount)
+            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PaymentGateway)
+            @Html.TextBoxFor(m => m.PaymentGateway, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description)
+            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Order</button>
+    }
 </div>
 

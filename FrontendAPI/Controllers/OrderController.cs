@@ -27,6 +27,7 @@ namespace FrontendAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(Order order)
         {
+            order.UserId = Guid.NewGuid().ToString();
             var response = await _httpClient.PostAsJsonAsync("api/billing/process", order);
             if (!response.IsSuccessStatusCode)
             {

@@ -25,11 +25,16 @@ namespace FrontendAPI
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddHttpClient();
+            //To-Do: add mapper
+            services.AddHttpClient("BillingService", client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5120/");
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

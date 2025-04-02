@@ -2,7 +2,7 @@ using BillingCore.Models;
 
 namespace BillingServiceHost.Services
 {
-    public class PaypalGateway : IPaymentGateway
+    public class PaymentGateway : IPaymentGateway
     {
         public bool ProcessPayment(Order order)
         {
