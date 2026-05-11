@@ -32,7 +32,7 @@ namespace ProjectsTests
             // Assert
             Assert.NotNull(receipt);
             Assert.Equal(order.OrderNumber, receipt.OrderNumber);
-            Assert.Equal(order.Amount, receipt.AmountPaid);
+            Assert.Equal(order.Amount, receipt.Amount);
 
             // Verify gateway was called
             mockGateway.Verify(g => g.ProcessPayment(It.IsAny<Order>()), Times.Once);

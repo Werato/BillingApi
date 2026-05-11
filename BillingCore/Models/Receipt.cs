@@ -6,8 +6,8 @@ namespace BillingCore.Models
     {
         public string ReceiptId { get; set; }
         public string OrderNumber { get; set; }
-        public DateTime Timestamp { get; set; }
         public string PaymentGateway { get; set; }
-        public decimal AmountPaid { get; set; }
+        public decimal Amount { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

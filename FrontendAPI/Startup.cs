@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BillingServiceHost.Interface;
+using BillingServiceHost.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FrontendAPI
 {
@@ -35,7 +37,9 @@ namespace FrontendAPI
             {
                 client.BaseAddress = new Uri("http://localhost:5120/");
             });
-
+            services.AddTransient<IBillingService, BillingService>();
+            services.AddTransient<IPaymentGateway, PaymentGateway>();
+            services.AddSingleton<IReceiptStore, InMemoryReceiptStore>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
