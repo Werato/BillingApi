@@ -21,6 +21,7 @@ namespace BillingServiceHost.Services
 
         public Receipt ProcessOrder(Order order)
         {
+            // TODO: transaction-level locking.
             lock (_lock)
             {
                 if (_receiptStore.TryGetReceipt(order.OrderNumber, out var existingReceipt))

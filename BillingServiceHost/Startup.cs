@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using BillingServiceHost.Interface;
+using BillingServiceHost.Services;
 
 namespace BillingServiceHost
 {
@@ -30,6 +30,10 @@ namespace BillingServiceHost
             
             services.AddScoped<Services.IBillingService, Services.BillingService>();
             services.AddScoped<Services.IPaymentGateway, Services.PaymentGateway>();
+            services.AddSingleton<IReceiptStore, InMemoryReceiptStore>();
+            services.AddScoped<IBillingService, BillingService>();
+            services.AddScoped<IPaymentGateway, PaymentGateway>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info

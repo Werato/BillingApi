@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BillingServiceHost\BillingServiceHost.csproj" />
-    <ProjectReference Include="..\FrontendAPI\FrontendAPI.csproj" />
   </ItemGroup>
 
 </Project>
