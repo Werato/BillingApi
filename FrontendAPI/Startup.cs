@@ -37,9 +37,6 @@ namespace FrontendAPI
             {
                 client.BaseAddress = new Uri("http://localhost:5120/");
             });
-            services.AddTransient<IBillingService, BillingService>();
-            services.AddTransient<IPaymentGateway, PaymentGateway>();
-            services.AddSingleton<IReceiptStore, InMemoryReceiptStore>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

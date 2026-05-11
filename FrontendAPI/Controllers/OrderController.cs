@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FrontendAPI.Models;
@@ -31,7 +28,7 @@ namespace FrontendAPI.Controllers
             var response = await _httpClient.PostAsJsonAsync("api/billing/process", order);
             if (!response.IsSuccessStatusCode)
             {
-                ModelState.AddModelError("", "Error in order processing, please contact support team: +(371)27138452");
+                ModelState.AddModelError("", "Order processing failed. Please try again later.");
                 return View(order);
             }
 
